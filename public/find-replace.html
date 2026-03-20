@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find & Replace — mdothree</title>
+  <meta name="description" content="Find and replace text with regex support, case-sensitive mode, and whole-word matching." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/find-replace" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Find & Replace — mdothree" />
+  <meta property="og:description" content="Find and replace text with regex support, case-sensitive mode, and whole-word matching." />
+  <meta property="og:url"         content="https://mdothree.com/find-replace" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Find & Replace — mdothree" />
+  <meta name="twitter:description" content="Find and replace text with regex support, case-sensitive mode, and whole-word matching." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/pages/find-replace.css" />
+  
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="text-diff.html">Diff</a></li>
+        <li><a href="find-replace.html" class="active">Find & Replace</a></li>
+        <li><a href="line-sorter.html">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Find & Replace</div>
+        <h1>🔍 Find & Replace</h1>
+        <p>Find text and replace it — with optional regex and case-sensitive modes.</p>
+      </div>
+
+      <div class="tool-layout-right" class="animate-fade-up-2">
+        <div>
+          <div class="panel">
+            <div class="panel-title">Search Options</div>
+            <div class="form-group">
+              <label class="form-label">Find</label>
+              <input type="text" class="form-input" id="findInput" placeholder="Search term..." />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Replace with</label>
+              <input type="text" class="form-input" id="replaceInput" placeholder="Replacement..." />
+            </div>
+            <div class="toggle-group">
+              <label class="toggle"><input type="checkbox" id="caseSensitive" /><span class="toggle-slider"></span></label>
+              <span class="toggle-label">Case sensitive</span>
+            </div>
+            <div class="toggle-group">
+              <label class="toggle"><input type="checkbox" id="useRegex" /><span class="toggle-slider"></span></label>
+              <span class="toggle-label">Use regex</span>
+            </div>
+            <div class="toggle-group">
+              <label class="toggle"><input type="checkbox" id="wholeWord" /><span class="toggle-slider"></span></label>
+              <span class="toggle-label">Whole word only</span>
+            </div>
+            <div class="btn-group mt-16">
+              <button class="btn btn-secondary" id="findBtn">🔍 Find All</button>
+              <button class="btn btn-primary" id="replaceBtn">Replace All</button>
+            </div>
+            <div class="mt-16 text-xs text-muted text-mono" id="matchCount"></div>
+            <div id="alertArea" class="mt-8"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div class="panel-title" style="border:none;margin:0;padding:0;">Text</div>
+              <div class="btn-group">
+                <button class="btn btn-ghost" id="copyOutputBtn" style="padding:6px 12px;font-size:0.78rem;">Copy</button>
+                <button class="btn btn-ghost" id="clearBtn" style="padding:6px 12px;font-size:0.78rem;">Clear</button>
+              </div>
+            </div>
+            <textarea class="form-textarea" id="textInput" style="min-height:380px;" placeholder="Paste your text here..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/find-replace.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

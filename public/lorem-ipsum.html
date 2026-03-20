@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorem Ipsum Generator — mdothree</title>
+  <meta name="description" content="Generate lorem ipsum placeholder text by paragraphs, sentences, words, or bytes. HTML wrap option." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/lorem-ipsum" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Lorem Ipsum Generator — mdothree" />
+  <meta property="og:description" content="Generate lorem ipsum placeholder text by paragraphs, sentences, words, or bytes. HTML wrap option." />
+  <meta property="og:url"         content="https://mdothree.com/lorem-ipsum" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Lorem Ipsum Generator — mdothree" />
+  <meta name="twitter:description" content="Generate lorem ipsum placeholder text by paragraphs, sentences, words, or bytes. HTML wrap option." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="lorem-ipsum.html" class="active">Lorem</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="line-sorter.html">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Lorem Ipsum</div>
+        <h1>📜 Lorem Ipsum Generator</h1>
+        <p>Generate classic or random placeholder text for your designs.</p>
+      </div>
+
+      <div class="tool-layout-right" class="animate-fade-up-2">
+        <div class="panel">
+          <div class="panel-title">Options</div>
+          <div class="form-group">
+            <label class="form-label">Type</label>
+            <div class="tabs" style="flex-direction:column;width:100%;">
+              <button class="tab-btn active w-full" data-unit="paragraphs">Paragraphs</button>
+              <button class="tab-btn w-full" data-unit="sentences">Sentences</button>
+              <button class="tab-btn w-full" data-unit="words">Words</button>
+              <button class="tab-btn w-full" data-unit="bytes">Bytes (approx)</button>
+            </div>
+          </div>
+          <div class="form-group mt-16">
+            <label class="form-label">Amount</label>
+            <input type="number" class="form-input" id="amount" value="3" min="1" max="100" />
+          </div>
+          <div class="toggle-group mt-8">
+            <label class="toggle"><input type="checkbox" id="startLorem" checked /><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Start with "Lorem ipsum..."</span>
+          </div>
+          <div class="toggle-group">
+            <label class="toggle"><input type="checkbox" id="htmlWrapped" /><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Wrap in &lt;p&gt; tags</span>
+          </div>
+          <button class="btn btn-primary w-full mt-16" id="generateBtn">📜 Generate</button>
+        </div>
+
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div class="panel-title" style="border:none;margin:0;padding:0;">Output</div>
+            <button class="btn btn-ghost" id="copyBtn" style="padding:6px 12px;font-size:0.78rem;">📋 Copy</button>
+          </div>
+          <div class="code-output" id="output" style="min-height:360px;font-family:var(--font-body);font-size:0.9rem;line-height:1.7;color:var(--slate-300);white-space:pre-wrap;"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/lorem-ipsum.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

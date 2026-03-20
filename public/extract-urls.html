@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extract URLs — mdothree</title>
+  <meta name="description" content="Extract all URLs and links from any block of text, HTML, or markdown." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/extract-urls" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Extract URLs — mdothree" />
+  <meta property="og:description" content="Extract all URLs and links from any block of text, HTML, or markdown." />
+  <meta property="og:url"         content="https://mdothree.com/extract-urls" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Extract URLs — mdothree" />
+  <meta name="twitter:description" content="Extract all URLs and links from any block of text, HTML, or markdown." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="text-diff.html">Diff</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="extract-urls.html" class="active">Extract URLs</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Extract URLs</div>
+        <h1>🔗 Extract URLs</h1>
+        <p>Find all URLs and links in a block of text.</p>
+      </div>
+
+      <div class="tool-layout" class="animate-fade-up-2">
+        <div class="panel">
+          <div class="panel-title">Input Text</div>
+          <textarea class="form-textarea" id="inputText" style="min-height:360px;" placeholder="Paste HTML, markdown, plain text, or any content with URLs..."></textarea>
+          <div class="toggle-group mt-16">
+            <label class="toggle"><input type="checkbox" id="deduplicate" checked /><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Remove duplicate URLs</span>
+          </div>
+          <button class="btn btn-primary mt-16" id="extractBtn">🔗 Extract URLs</button>
+        </div>
+
+        <div>
+          <div class="panel" id="resultPanel" style="display:none;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div class="panel-title" style="border:none;margin:0;padding:0;">Found URLs</div>
+              <div class="btn-group">
+                <span class="text-xs text-muted text-mono" id="urlCount"></span>
+                <button class="btn btn-ghost" id="copyAllBtn" style="padding:6px 12px;font-size:0.78rem;">Copy All</button>
+              </div>
+            </div>
+            <div id="urlList" style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;"></div>
+          </div>
+
+          <div class="panel mt-16">
+            <div class="panel-title">What gets extracted</div>
+            <p class="text-sm text-muted">Detects http://, https://, ftp:// URLs, bare domains like example.com, and markdown links [text](url).</p>
+          </div>
+        </div>
+      </div>
+      <div id="alertArea" class="mt-16"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/extract-urls.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

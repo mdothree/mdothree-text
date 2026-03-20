@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Converter — mdothree</title>
+  <meta name="description" content="Convert text to UPPER, lower, Title, Sentence, camelCase, snake_case, kebab-case, and more." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/case-converter" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Case Converter — mdothree" />
+  <meta property="og:description" content="Convert text to UPPER, lower, Title, Sentence, camelCase, snake_case, kebab-case, and more." />
+  <meta property="og:url"         content="https://mdothree.com/case-converter" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Case Converter — mdothree" />
+  <meta name="twitter:description" content="Convert text to UPPER, lower, Title, Sentence, camelCase, snake_case, kebab-case, and more." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html" class="active">Case</a></li>
+        <li><a href="text-diff.html">Diff</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="line-sorter.html">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Case Converter</div>
+        <h1>Aa Case Converter</h1>
+        <p>Convert text between different letter cases instantly.</p>
+      </div>
+
+      <div class="panel animate-fade-up-2">
+        <div class="form-group">
+          <label class="form-label">Input text</label>
+          <textarea class="form-textarea" id="inputText" style="min-height:160px;" placeholder="Type or paste text here..."></textarea>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+          <button class="btn btn-ghost case-btn" data-case="upper">UPPER CASE</button>
+          <button class="btn btn-ghost case-btn" data-case="lower">lower case</button>
+          <button class="btn btn-ghost case-btn" data-case="title">Title Case</button>
+          <button class="btn btn-ghost case-btn" data-case="sentence">Sentence case</button>
+          <button class="btn btn-ghost case-btn" data-case="camel">camelCase</button>
+          <button class="btn btn-ghost case-btn" data-case="pascal">PascalCase</button>
+          <button class="btn btn-ghost case-btn" data-case="snake">snake_case</button>
+          <button class="btn btn-ghost case-btn" data-case="kebab">kebab-case</button>
+          <button class="btn btn-ghost case-btn" data-case="constant">CONSTANT_CASE</button>
+          <button class="btn btn-ghost case-btn" data-case="dot">dot.case</button>
+          <button class="btn btn-ghost case-btn" data-case="alternating">aLtErNaTiNg</button>
+          <button class="btn btn-ghost case-btn" data-case="inverse">iNVERSE cASE</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Output</label>
+          <div style="position:relative;">
+            <textarea class="form-textarea" id="outputText" style="min-height:160px;" readonly placeholder="Output will appear here..."></textarea>
+            <button class="btn btn-secondary" id="copyBtn" style="position:absolute;top:10px;right:10px;padding:6px 12px;font-size:0.78rem;">Copy</button>
+          </div>
+        </div>
+
+        <div id="activeCase" class="text-xs text-muted text-mono"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/case-converter.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Diff — mdothree</title>
+  <meta name="description" content="Compare two texts and highlight character, word, or line-level differences. Live diff." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/text-diff" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Text Diff — mdothree" />
+  <meta property="og:description" content="Compare two texts and highlight character, word, or line-level differences. Live diff." />
+  <meta property="og:url"         content="https://mdothree.com/text-diff" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Text Diff — mdothree" />
+  <meta name="twitter:description" content="Compare two texts and highlight character, word, or line-level differences. Live diff." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/pages/text-diff.css" />
+  
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="text-diff.html" class="active">Diff</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="line-sorter.html">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Text Diff</div>
+        <h1>⟺ Text Diff</h1>
+        <p>Compare two texts and highlight what changed.</p>
+      </div>
+
+      <div class="alert alert-info animate-fade-up" id="freeBanner" style="margin-bottom:20px;">
+        ℹ️ <strong>Free plan:</strong> Diff texts up to 5,000 characters each. <a href="#" onclick="requirePremium('Large text diff','text-diff');return false;" style="color:var(--emerald);text-decoration:none;margin-left:8px;">Upgrade to Pro →</a>
+      </div>
+      <div class="tool-layout" class="animate-fade-up-2">
+        <div class="panel">
+          <div class="panel-title">Original Text (A)</div>
+          <textarea class="form-textarea" id="textA" style="min-height:240px;" placeholder="Paste original text..."></textarea>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Modified Text (B)</div>
+          <textarea class="form-textarea" id="textB" style="min-height:240px;" placeholder="Paste modified text..."></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin:16px 0;" class="animate-fade-up-3">
+        <div class="tabs">
+          <button class="tab-btn active" data-mode="chars">Character diff</button>
+          <button class="tab-btn" data-mode="words">Word diff</button>
+          <button class="tab-btn" data-mode="lines">Line diff</button>
+        </div>
+        <button class="btn btn-primary" id="diffBtn">⟺ Compare</button>
+      </div>
+
+      <div class="panel animate-fade-up-4" id="resultPanel" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div class="panel-title" style="border:none;margin:0;padding:0;">Diff Result</div>
+          <div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:0.78rem;">
+            <span><span class="diff-added" style="padding:2px 6px;border-radius:3px;">+</span> <span id="addedCount">0</span> added</span>
+            <span><span class="diff-removed" style="padding:2px 6px;border-radius:3px;">-</span> <span id="removedCount">0</span> removed</span>
+          </div>
+        </div>
+        <div class="diff-output" id="diffOutput"></div>
+      </div>
+      <div id="alertArea" class="mt-16"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/text-diff.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

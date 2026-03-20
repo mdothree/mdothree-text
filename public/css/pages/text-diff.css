@@ -1,0 +1,19 @@
+/* Page-specific styles: text-diff.html */
+
+.diff-added   { background: rgba(16,185,129,0.18); color: #34D399; text-decoration: none; }
+    .diff-removed { background: rgba(239,68,68,0.18); color: #FCA5A5; text-decoration: line-through; }
+    .diff-equal   { color: var(--slate-300); }
+    .diff-output  {
+      background: var(--slate-950);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.83rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 200px;
+      max-height: 500px;
+      overflow-y: auto;
+    }

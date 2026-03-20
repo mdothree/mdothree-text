@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Counter — mdothree</title>
+  <meta name="description" content="Count words, characters, sentences, paragraphs, and reading time. Real-time stats and top word frequency." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/word-counter" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Word Counter — mdothree" />
+  <meta property="og:description" content="Count words, characters, sentences, paragraphs, and reading time. Real-time stats and top word frequency." />
+  <meta property="og:url"         content="https://mdothree.com/word-counter" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Word Counter — mdothree" />
+  <meta name="twitter:description" content="Count words, characters, sentences, paragraphs, and reading time. Real-time stats and top word frequency." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html" class="active">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="text-diff.html">Diff</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="line-sorter.html">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Word Counter</div>
+        <h1>🔢 Word Counter</h1>
+        <p>Paste or type your text below. Stats update in real time.</p>
+      </div>
+
+      <div class="tool-layout-left" class="animate-fade-up-2">
+        <div class="panel">
+          <textarea class="form-textarea" id="textInput" style="min-height:400px;font-size:0.95rem;" placeholder="Paste or type your text here..."></textarea>
+          <div class="btn-group mt-16">
+            <button class="btn btn-ghost" id="clearBtn">Clear</button>
+            <button class="btn btn-ghost" id="copyBtn">📋 Copy text</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="stat-card">
+              <div class="stat-value" id="wordCount">0</div>
+              <div class="stat-label">Words</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="charCount">0</div>
+              <div class="stat-label">Characters</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="charNoSpaces">0</div>
+              <div class="stat-label">Chars (no spaces)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="sentenceCount">0</div>
+              <div class="stat-label">Sentences</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="paragraphCount">0</div>
+              <div class="stat-label">Paragraphs</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="lineCount">0</div>
+              <div class="stat-label">Lines</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="readingTime">0 sec</div>
+              <div class="stat-label">Reading time</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="speakingTime">0 sec</div>
+              <div class="stat-label">Speaking time</div>
+            </div>
+          </div>
+
+          <div class="panel mt-16">
+            <div class="panel-title">Top Words</div>
+            <div id="topWords" style="display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/word-counter.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Line Sorter & Tools — mdothree</title>
+  <meta name="description" content="Sort, deduplicate, shuffle, number, trim, and transform lines of text." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mdothree.com/line-sorter" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Line Sorter & Tools — mdothree" />
+  <meta property="og:description" content="Sort, deduplicate, shuffle, number, trim, and transform lines of text." />
+  <meta property="og:url"         content="https://mdothree.com/line-sorter" />
+  <meta property="og:site_name"   content="mdothree" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Line Sorter & Tools — mdothree" />
+  <meta name="twitter:description" content="Sort, deduplicate, shuffle, number, trim, and transform lines of text." />
+  <!-- PWA -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#10B981" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- DNS prefetch / preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">m<span class="dot">.</span>three <span style="color:var(--slate-600);margin-left:8px;font-size:0.7rem;">/ text</span></a>
+      <ul class="nav-links">
+        <li><a href="word-counter.html">Counter</a></li>
+        <li><a href="case-converter.html">Case</a></li>
+        <li><a href="text-diff.html">Diff</a></li>
+        <li><a href="find-replace.html">Find & Replace</a></li>
+        <li><a href="line-sorter.html" class="active">Line Tools</a></li>
+        <li style="margin-left:auto;"><a href="pricing.html">Pricing</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main class="tool-page" id="main-content">
+    <div class="container">
+      <div class="tool-header animate-fade-up">
+        <div class="breadcrumb"><a href="index.html">Text Tools</a><span>/</span> Line Tools</div>
+        <h1>↕️ Line Tools</h1>
+        <p>Sort, deduplicate, shuffle, number, trim, and transform lines.</p>
+      </div>
+
+      <div class="tool-layout-left" class="animate-fade-up-2">
+        <div>
+          <div class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div class="panel-title" style="border:none;margin:0;padding:0;">Input</div>
+              <span class="text-xs text-muted text-mono" id="lineInfo">0 lines</span>
+            </div>
+            <textarea class="form-textarea" id="inputText" style="min-height:300px;" placeholder="Paste lines of text here..."></textarea>
+          </div>
+          <div class="panel mt-16" id="outputPanel" style="display:none;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div class="panel-title" style="border:none;margin:0;padding:0;">Output</div>
+              <div class="btn-group">
+                <button class="btn btn-ghost" id="copyOutputBtn" style="padding:6px 12px;font-size:0.78rem;">Copy</button>
+                <button class="btn btn-secondary" id="useAsInputBtn" style="padding:6px 12px;font-size:0.78rem;">Use as input</button>
+              </div>
+            </div>
+            <textarea class="form-textarea" id="outputText" style="min-height:200px;" readonly></textarea>
+            <div class="text-xs text-muted text-mono mt-8" id="outputInfo"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-title">Operations</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button class="btn btn-ghost w-full" data-op="sort-az">↑ Sort A→Z</button>
+              <button class="btn btn-ghost w-full" data-op="sort-za">↓ Sort Z→A</button>
+              <button class="btn btn-ghost w-full" data-op="sort-length-asc">↑ Sort by length (short)</button>
+              <button class="btn btn-ghost w-full" data-op="sort-length-desc">↓ Sort by length (long)</button>
+              <button class="btn btn-ghost w-full" data-op="reverse">↕ Reverse order</button>
+              <button class="btn btn-ghost w-full" data-op="shuffle">🔀 Shuffle randomly</button>
+              <button class="btn btn-ghost w-full" data-op="dedup">🧹 Remove duplicates</button>
+              <button class="btn btn-ghost w-full" data-op="dedup-ci">🧹 Remove dupes (ignore case)</button>
+              <button class="btn btn-ghost w-full" data-op="trim">✂️ Trim whitespace</button>
+              <button class="btn btn-ghost w-full" data-op="remove-empty">🚫 Remove empty lines</button>
+              <button class="btn btn-ghost w-full" data-op="number">🔢 Add line numbers</button>
+              <button class="btn btn-ghost w-full" data-op="remove-numbers">✕ Remove line numbers</button>
+              <button class="btn btn-ghost w-full" data-op="upper">UPPER CASE each line</button>
+              <button class="btn btn-ghost w-full" data-op="lower">lower case each line</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-copy">© 2024 mdothree.com</div></div></footer>
+
+  
+  <script type="module" src="js/pages/line-sorter.js"></script>
+  <script src="js/nav-toggle.js"></script>
+</body>
+</html>
