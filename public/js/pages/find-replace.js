@@ -30,7 +30,7 @@ import { saveToHistory } from '../config/firebase.js';
       }
     });
 
-    document.getElementById('replaceBtn').addEventListener('click', () => {
+    document.getElementById('replaceBtn').addEventListener('click', async () => {
       const text = textInput.value;
       const term = findInput.value;
       const replacement = replaceInput.value;
