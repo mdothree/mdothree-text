@@ -1,6 +1,7 @@
 // Page controller: word-counter.html
 import { analyzeText } from '../services/wordCounter.js';
 import { saveToHistory } from '../config/firebase.js';
+import { copyWithFeedback } from '../utils/dom.js';
 
     const textInput = document.getElementById('textInput');
 
@@ -21,7 +22,11 @@ import { saveToHistory } from '../config/firebase.js';
       stats.topWords.forEach(([word, count]) => {
         const row = document.createElement('div');
         row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;';
-        row.innerHTML = `<span class="text-mono" style="color:var(--slate-300);">${word}</span><span class="text-mono" style="color:var(--emerald);">${count}</span>`;
+        const w = document.createElement('span');
+        w.className = 'text-mono'; w.style.color = 'var(--slate-300)'; w.textContent = word;
+        const c = document.createElement('span');
+        c.className = 'text-mono'; c.style.color = 'var(--emerald)'; c.textContent = count;
+        row.append(w, c);
         topWordsEl.appendChild(row);
       });
     }
@@ -35,9 +40,7 @@ import { saveToHistory } from '../config/firebase.js';
     textInput.addEventListener('input', update);
     document.getElementById('clearBtn').addEventListener('click', () => { textInput.value = ''; update(); });
     document.getElementById('copyBtn').addEventListener('click', async () => {
-      await navigator.clipboard.writeText(textInput.value);
-      document.getElementById('copyBtn').textContent = '✅ Copied!';
-      setTimeout(() => { document.getElementById('copyBtn').textContent = '📋 Copy text'; }, 2000);
+      await copyWithFeedback(document.getElementById('copyBtn'), textInput.value, '📋 Copy text');
     });
 
     update();

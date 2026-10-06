@@ -8,7 +8,7 @@
  */
 
 import { ENV } from './env.js';
-import { auth, db, initFirebase } from './config/firebase.js';
+import { auth, db, initFirebase } from './firebase.js';
 import { getDoc, setDoc, doc, serverTimestamp }
   from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 

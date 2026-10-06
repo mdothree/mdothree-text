@@ -1,6 +1,7 @@
 // Page controller: find-replace.html
 import { findReplace } from '../services/findReplace.js';
 import { saveToHistory } from '../config/firebase.js';
+import { showAlert, copyWithFeedback } from '../utils/dom.js';
 
     const textInput = document.getElementById('textInput');
     const findInput = document.getElementById('findInput');
@@ -26,7 +27,7 @@ import { saveToHistory } from '../config/firebase.js';
         matchCount.textContent = `${count} match${count !== 1 ? 'es' : ''} found`;
         matchCount.style.color = count > 0 ? 'var(--emerald)' : 'var(--slate-500)';
       } catch (e) {
-        alertArea.innerHTML = `<div class="alert alert-error">❌ Invalid regex: ${e.message}</div>`;
+        showAlert(alertArea, 'error', `❌ Invalid regex: ${e.message}`);
       }
     });
 
@@ -36,21 +37,23 @@ import { saveToHistory } from '../config/firebase.js';
       const replacement = replaceInput.value;
       if (!term) return;
       alertArea.innerHTML = '';
+      const opts = getOptions();
+      let result, count;
       try {
-        const { result, count } = findReplace(text, term, replacement, getOptions());
-        textInput.value = result;
-        matchCount.textContent = `Replaced ${count} match${count !== 1 ? 'es' : ''}`;
-        matchCount.style.color = 'var(--emerald)';
-      await saveToHistory('find-replace', { count, useRegex });
+        ({ result, count } = findReplace(text, term, replacement, opts));
       } catch (e) {
-        alertArea.innerHTML = `<div class="alert alert-error">❌ Invalid regex: ${e.message}</div>`;
+        showAlert(alertArea, 'error', `❌ Invalid regex: ${e.message}`);
+        return;
       }
+      textInput.value = result;
+      matchCount.textContent = `Replaced ${count} match${count !== 1 ? 'es' : ''}`;
+      matchCount.style.color = 'var(--emerald)';
+      // History is best-effort and must never surface as an "Invalid regex" error.
+      saveToHistory('find-replace', { count, useRegex: opts.useRegex }).catch(() => {});
     });
 
     document.getElementById('copyOutputBtn').addEventListener('click', async () => {
-      await navigator.clipboard.writeText(textInput.value);
-      document.getElementById('copyOutputBtn').textContent = '✅ Copied!';
-      setTimeout(() => { document.getElementById('copyOutputBtn').textContent = 'Copy'; }, 2000);
+      await copyWithFeedback(document.getElementById('copyOutputBtn'), textInput.value, 'Copy');
     });
 
     document.getElementById('clearBtn').addEventListener('click', () => {

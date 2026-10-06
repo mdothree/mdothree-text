@@ -1,6 +1,7 @@
 // Page controller: line-sorter.html
 import { processLines } from '../services/lineTools.js';
 import { saveToHistory } from '../config/firebase.js';
+import { copyWithFeedback } from '../utils/dom.js';
 
     const inputText = document.getElementById('inputText');
     const outputText = document.getElementById('outputText');
@@ -28,9 +29,7 @@ import { saveToHistory } from '../config/firebase.js';
     });
 
     document.getElementById('copyOutputBtn').addEventListener('click', async () => {
-      await navigator.clipboard.writeText(outputText.value);
-      document.getElementById('copyOutputBtn').textContent = '✅ Copied!';
-      setTimeout(() => { document.getElementById('copyOutputBtn').textContent = 'Copy'; }, 2000);
+      await copyWithFeedback(document.getElementById('copyOutputBtn'), outputText.value, 'Copy');
     });
 
     document.getElementById('useAsInputBtn').addEventListener('click', () => {

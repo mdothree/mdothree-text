@@ -1,6 +1,7 @@
 // Page controller: extract-urls.html
 import { extractURLs } from '../services/lineTools.js';
 import { saveToHistory } from '../config/firebase.js';
+import { showAlert, copyWithFeedback } from '../utils/dom.js';
 
     document.getElementById('extractBtn').addEventListener('click', () => {
       const text = document.getElementById('inputText').value;
@@ -8,7 +9,7 @@ import { saveToHistory } from '../config/firebase.js';
       const alertArea = document.getElementById('alertArea');
 
       if (!text.trim()) {
-        alertArea.innerHTML = '<div class="alert alert-error">❌ Please paste some text first.</div>';
+        showAlert(alertArea, 'error', '❌ Please paste some text first.');
         return;
       }
       alertArea.innerHTML = '';
@@ -27,11 +28,20 @@ import { saveToHistory } from '../config/firebase.js';
         urls.forEach(url => {
           const item = document.createElement('div');
           item.style.cssText = 'display:flex;align-items:center;gap:10px;background:var(--slate-800);border-radius:6px;padding:10px 12px;border:1px solid rgba(255,255,255,0.06);';
-          item.innerHTML = `
-            <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--emerald);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${url}</span>
-            <a href="${url}" target="_blank" rel="noopener" style="color:var(--slate-500);text-decoration:none;font-size:0.85rem;flex-shrink:0;" title="Open">↗</a>
-            <button onclick="navigator.clipboard.writeText('${url.replace(/'/g, "\\'")}');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500);" style="background:none;border:none;cursor:pointer;color:var(--slate-500);font-size:0.85rem;flex-shrink:0;">📋</button>
-          `;
+          // Built with DOM APIs: the URL comes from user text and must not be parsed as HTML/JS.
+          const text = document.createElement('span');
+          text.style.cssText = 'font-family:var(--font-mono);font-size:0.8rem;color:var(--emerald);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+          text.textContent = url;
+          const open = document.createElement('a');
+          open.href = url; open.target = '_blank'; open.rel = 'noopener noreferrer';
+          open.style.cssText = 'color:var(--slate-500);text-decoration:none;font-size:0.85rem;flex-shrink:0;';
+          open.title = 'Open'; open.setAttribute('aria-label', 'Open URL'); open.textContent = '↗';
+          const copy = document.createElement('button');
+          copy.type = 'button';
+          copy.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--slate-500);font-size:0.85rem;flex-shrink:0;';
+          copy.title = 'Copy'; copy.setAttribute('aria-label', 'Copy URL'); copy.textContent = '📋';
+          copy.addEventListener('click', () => copyWithFeedback(copy, url, '📋'));
+          item.append(text, open, copy);
           urlList.appendChild(item);
         });
       }
@@ -42,7 +52,5 @@ import { saveToHistory } from '../config/firebase.js';
 
     document.getElementById('copyAllBtn')?.addEventListener('click', async () => {
       const urls = Array.from(document.querySelectorAll('#urlList span')).map(s => s.textContent);
-      await navigator.clipboard.writeText(urls.join('\n'));
-      document.getElementById('copyAllBtn').textContent = '✅ Copied!';
-      setTimeout(() => { document.getElementById('copyAllBtn').textContent = 'Copy All'; }, 2000);
+      await copyWithFeedback(document.getElementById('copyAllBtn'), urls.join('\n'), 'Copy All');
     });

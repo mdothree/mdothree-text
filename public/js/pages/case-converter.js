@@ -1,6 +1,7 @@
 // Page controller: case-converter.html
 import { convertCase } from '../services/caseConverter.js';
 import { saveToHistory } from '../config/firebase.js';
+import { copyWithFeedback } from '../utils/dom.js';
 
     const inputText = document.getElementById('inputText');
     const outputText = document.getElementById('outputText');
@@ -30,8 +31,7 @@ import { saveToHistory } from '../config/firebase.js';
 
     copyBtn.addEventListener('click', async () => {
       if (!outputText.value) return;
-      await navigator.clipboard.writeText(outputText.value);
-      copyBtn.textContent = '✅ Copied!';
-      saveToHistory('case-converter', { caseType: currentCase, charCount: outputText.value.length });
-      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+      if (await copyWithFeedback(copyBtn, outputText.value, 'Copy')) {
+        saveToHistory('case-converter', { caseType: currentCase, charCount: outputText.value.length });
+      }
     });

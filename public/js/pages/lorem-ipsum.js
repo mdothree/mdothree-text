@@ -1,6 +1,7 @@
 // Page controller: lorem-ipsum.html
 import { generateLorem } from '../services/loremGenerator.js';
 import { saveToHistory } from '../config/firebase.js';
+import { copyWithFeedback } from '../utils/dom.js';
 
     let currentUnit = 'paragraphs';
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -24,10 +25,9 @@ import { saveToHistory } from '../config/firebase.js';
     document.getElementById('copyBtn').addEventListener('click', async () => {
       const text = document.getElementById('output').textContent;
       if (!text) return;
-      await navigator.clipboard.writeText(text);
-      document.getElementById('copyBtn').textContent = '✅ Copied!';
-      saveToHistory('lorem-ipsum', { unit: currentUnit });
-      setTimeout(() => { document.getElementById('copyBtn').textContent = '📋 Copy'; }, 2000);
+      if (await copyWithFeedback(document.getElementById('copyBtn'), text, '📋 Copy')) {
+        saveToHistory('lorem-ipsum', { unit: currentUnit });
+      }
     });
 
     generate();
