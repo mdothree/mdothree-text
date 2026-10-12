@@ -74,20 +74,20 @@
         <div>
           <div class="panel">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-              <div class="panel-title" style="border:none;margin:0;padding:0;">Input</div>
+              <div class="panel-title" id="inputTextLabel" style="border:none;margin:0;padding:0;">Input</div>
               <span class="text-xs text-muted text-mono" id="lineInfo">0 lines</span>
             </div>
-            <textarea class="form-textarea" id="inputText" style="min-height:300px;" placeholder="Paste lines of text here..."></textarea>
+            <textarea aria-labelledby="inputTextLabel" class="form-textarea" id="inputText" style="min-height:300px;" placeholder="Paste lines of text here..."></textarea>
           </div>
           <div class="panel mt-16" id="outputPanel" style="display:none;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-              <div class="panel-title" style="border:none;margin:0;padding:0;">Output</div>
+              <div class="panel-title" id="outputTextLabel" style="border:none;margin:0;padding:0;">Output</div>
               <div class="btn-group">
                 <button class="btn btn-ghost" id="copyOutputBtn" style="padding:6px 12px;font-size:0.78rem;">Copy</button>
                 <button class="btn btn-secondary" id="useAsInputBtn" style="padding:6px 12px;font-size:0.78rem;">Use as input</button>
               </div>
             </div>
-            <textarea class="form-textarea" id="outputText" style="min-height:200px;" readonly></textarea>
+            <textarea aria-labelledby="outputTextLabel" class="form-textarea" id="outputText" style="min-height:200px;" readonly></textarea>
             <div class="text-xs text-muted text-mono mt-8" id="outputInfo"></div>
           </div>
         </div>

@@ -72,8 +72,8 @@
 
       <div class="tool-layout animate-fade-up-2">
         <div class="panel">
-          <div class="panel-title">Input Text</div>
-          <textarea class="form-textarea" id="inputText" style="min-height:360px;" placeholder="Paste HTML, markdown, plain text, or any content with URLs..."></textarea>
+          <div class="panel-title" id="inputTextLabel">Input Text</div>
+          <textarea aria-labelledby="inputTextLabel" class="form-textarea" id="inputText" style="min-height:360px;" placeholder="Paste HTML, markdown, plain text, or any content with URLs..."></textarea>
           <div class="toggle-group mt-16">
             <label class="toggle"><input aria-label="Remove duplicate URLs" type="checkbox" id="deduplicate" checked /><span class="toggle-slider"></span></label>
             <span class="toggle-label">Remove duplicate URLs</span>
