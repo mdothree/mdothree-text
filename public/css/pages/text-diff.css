@@ -17,3 +17,9 @@
       max-height: 500px;
       overflow-y: auto;
     }
+
+/* MDOTHREE-HSCROLL: the mode tabs + Compare row wraps (inline flex-wrap) and the tabs may
+   shrink/wrap, so the page never scrolls sideways at 320-390px; the diff pane scrolls itself. */
+#diffBtn { flex-shrink: 0; }
+.animate-fade-up-3 > .tabs { max-width: 100%; flex-wrap: wrap; }
+.diff-output { overflow-x: auto; overflow-wrap: anywhere; }
