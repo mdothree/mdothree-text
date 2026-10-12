@@ -1,7 +1,7 @@
 {
   "name": "mdothree-text",
   "version": "1.0.0",
-  "description": "Text Tools \u2014 word counter, case converter, diff, find & replace. Free.",
+  "description": "Text Tools \u2014 word counter, case converter, diff, find & replace.",
   "private": true,
   "type": "module",
   "scripts": {
