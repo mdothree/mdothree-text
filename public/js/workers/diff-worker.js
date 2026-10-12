@@ -15,9 +15,17 @@ self.onmessage = function(e) {
   }
 };
 
+// C7B-TEXTDIFF-SURROGATE: split by user-perceived character (grapheme), not UTF-16 code
+// unit, so emoji / skin-tone / flag sequences are never cut in half (no lone surrogates)
+// and the +/- counts are in characters a person would count.
+const _seg = (typeof Intl !== 'undefined' && Intl.Segmenter) ? new Intl.Segmenter(undefined, { granularity: 'grapheme' }) : null;
+function graphemes(text) {
+  return _seg ? Array.from(_seg.segment(text), s => s.segment) : Array.from(text);
+}
+
 function diffTexts(a, b, mode) {
   let ta, tb;
-  if (mode === 'chars')      { ta = a.split('');  tb = b.split(''); }
+  if (mode === 'chars')      { ta = graphemes(a); tb = graphemes(b); }
   else if (mode === 'words') { ta = a.split(/(\s+)/); tb = b.split(/(\s+)/); }
   else                       { ta = a.split('\n'); tb = b.split('\n'); }
 
@@ -26,8 +34,8 @@ function diffTexts(a, b, mode) {
   ops.forEach(op => {
     const esc = op.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'↵\n');
     if (op.type === 'equal')  html += `<span class="diff-equal">${esc}</span>`;
-    else if (op.type === 'insert') { html += `<span class="diff-added">${esc}</span>`;   added   += op.text.length; }
-    else if (op.type === 'delete') { html += `<span class="diff-removed">${esc}</span>`; removed += op.text.length; }
+    else if (op.type === 'insert') { html += `<span class="diff-added">${esc}</span>`;   added   += graphemes(op.text).length; }
+    else if (op.type === 'delete') { html += `<span class="diff-removed">${esc}</span>`; removed += graphemes(op.text).length; }
   });
   return { html, added, removed };
 }

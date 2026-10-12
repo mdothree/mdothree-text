@@ -1,11 +1,19 @@
 // textDiff.js — Simple diff without external deps
 
+// C7B-TEXTDIFF-SURROGATE: split by user-perceived character (grapheme), not UTF-16 code
+// unit, so emoji / skin-tone / flag sequences are never cut in half (no lone surrogates)
+// and the +/- counts are in characters a person would count.
+const _seg = (typeof Intl !== 'undefined' && Intl.Segmenter) ? new Intl.Segmenter(undefined, { granularity: 'grapheme' }) : null;
+function graphemes(text) {
+  return _seg ? Array.from(_seg.segment(text), s => s.segment) : Array.from(text);
+}
+
 export function diffTexts(a, b, mode = 'chars') {
   let tokens_a, tokens_b;
 
   if (mode === 'chars') {
-    tokens_a = a.split('');
-    tokens_b = b.split('');
+    tokens_a = graphemes(a);
+    tokens_b = graphemes(b);
   } else if (mode === 'words') {
     tokens_a = tokenizeWords(a);
     tokens_b = tokenizeWords(b);
@@ -24,10 +32,10 @@ export function diffTexts(a, b, mode = 'chars') {
       html += `<span class="diff-equal">${escaped}</span>`;
     } else if (op.type === 'insert') {
       html += `<span class="diff-added">${escaped}</span>`;
-      added += op.text.length;
+      added += graphemes(op.text).length;
     } else if (op.type === 'delete') {
       html += `<span class="diff-removed">${escaped}</span>`;
-      removed += op.text.length;
+      removed += graphemes(op.text).length;
     }
   });
 
