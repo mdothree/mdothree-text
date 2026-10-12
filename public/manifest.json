@@ -1,7 +1,7 @@
 {
   "name": "mdothree Text Tools",
   "short_name": "Text Tools",
-  "description": "Free text utilities in your browser: word counter, case converter, text diff, find and replace, line sorter, URL extractor, and lorem ipsum generator.",
+  "description": "Text utilities that run in your browser: word counter, case converter, text diff, find and replace, line sorter, URL extractor, and lorem ipsum generator.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
