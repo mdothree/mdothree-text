@@ -1,6 +1,6 @@
 // Page controller: text-diff.html
 import { diffTexts } from '../services/textDiff.js';
-    import { initPaywall, isPremium, requirePremium, FREE_LIMITS } from '../stripe-paywall.js';
+    import { initPaywall, isPremium, requirePremium, OPEN_LIMITS } from '../stripe-paywall.js';
     import { saveToHistory } from '../config/firebase.js';
     import { showAlert } from '../utils/dom.js';
     initPaywall();
@@ -20,8 +20,8 @@ import { diffTexts } from '../services/textDiff.js';
     const a = document.getElementById('textA').value;
     const b = document.getElementById('textB').value;
     // Banner promises "up to 5,000 characters each" — check both sides, not just A.
-    if ((a.length > FREE_LIMITS.textDiffChars || b.length > FREE_LIMITS.textDiffChars) && !isPremium()) {
-      requirePremium(`Diffing texts over ${FREE_LIMITS.textDiffChars.toLocaleString()} characters requires Pro`, 'text-diff-size');
+    if ((a.length > OPEN_LIMITS.textDiffChars || b.length > OPEN_LIMITS.textDiffChars) && !isPremium()) {
+      requirePremium(`Diffing texts over ${OPEN_LIMITS.textDiffChars.toLocaleString()} characters requires Pro`, 'text-diff-size');
       return;
     }
     if (!a || !b) {

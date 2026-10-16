@@ -27,7 +27,7 @@ import { showAlert, copyWithFeedback } from '../utils/dom.js';
       } else {
         urls.forEach(url => {
           const item = document.createElement('div');
-          item.style.cssText = 'display:flex;align-items:center;gap:10px;background:var(--slate-800);border-radius:6px;padding:10px 12px;border:1px solid rgba(255,255,255,0.06);';
+          item.style.cssText = 'display:flex;align-items:center;gap:10px;background:var(--slate-800);border-radius:4px;padding:10px 12px;border:1px solid rgba(255,255,255,0.06);';
           // Built with DOM APIs: the URL comes from user text and must not be parsed as HTML/JS.
           const text = document.createElement('span');
           text.style.cssText = 'font-family:var(--font-mono);font-size:0.8rem;color:var(--emerald);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
