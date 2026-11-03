@@ -27,7 +27,7 @@ function diffTexts(a, b, mode) {
   let ta, tb;
   if (mode === 'chars')      { ta = graphemes(a); tb = graphemes(b); }
   else if (mode === 'words') { ta = a.split(/(\s+)/); tb = b.split(/(\s+)/); }
-  else                       { ta = a.split('\n'); tb = b.split('\n'); }
+  else                       { ta = splitLines(a); tb = splitLines(b); }
 
   const ops = lcs_diff(ta, tb);
   let html = '', added = 0, removed = 0;
@@ -38,6 +38,11 @@ function diffTexts(a, b, mode) {
     else if (op.type === 'delete') { html += `<span class="diff-removed">${esc}</span>`; removed += graphemes(op.text).length; }
   });
   return { html, added, removed };
+}
+
+// Line tokens keep their trailing newline so delimiters and blank-line changes stay visible in the diff.
+function splitLines(text) {
+  return text === '' ? [] : text.split(/(?<=\n)/);
 }
 
 function lcs_diff(a, b) {

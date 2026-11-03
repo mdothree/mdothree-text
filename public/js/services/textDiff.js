@@ -18,8 +18,8 @@ export function diffTexts(a, b, mode = 'chars') {
     tokens_a = tokenizeWords(a);
     tokens_b = tokenizeWords(b);
   } else {
-    tokens_a = a.split('\n');
-    tokens_b = b.split('\n');
+    tokens_a = splitLines(a);
+    tokens_b = splitLines(b);
   }
 
   const ops = lcs_diff(tokens_a, tokens_b);
@@ -40,6 +40,11 @@ export function diffTexts(a, b, mode = 'chars') {
   });
 
   return { html, added, removed };
+}
+
+// Line tokens keep their trailing newline so delimiters and blank-line changes stay visible in the diff.
+function splitLines(text) {
+  return text === '' ? [] : text.split(/(?<=\n)/);
 }
 
 function tokenizeWords(text) {
